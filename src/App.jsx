@@ -1,9 +1,11 @@
 import Menubar from "./Components/Menubar";
+import Search from "./Sections/Search";
 function App() {
   return (
-    <>
-     <Menubar />
-    </>
+    <div className="flex ">
+      <Menubar />
+      <Search />
+    </div>
   );
 }
 
