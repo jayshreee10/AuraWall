@@ -15,7 +15,7 @@ function WallPapersContextProvider({ children }) {
     try {
       const validatedValue = Validation.inputValidation(queryValue);
       console.log(validatedValue);
-      const PEXEL_URL = `https://api.pexels.com/v1/search/?page=${page}&per_page=50&query=${validatedValue}`;
+      const PEXEL_URL = `https://api.pexels.com/v1/search/?page=${page}&per_page=20&query=${validatedValue}`;
       const userKey =
         "U7QlRU8f5PQyLggmw5TvYsYBOsbyLd64EJZ5auiPf9oZEMYVnxVb6Olr";
       const authAxios = axios.create({
@@ -27,7 +27,22 @@ function WallPapersContextProvider({ children }) {
       console.log("getWallPapers function called");
       const response = await authAxios.get();
       const data = response.data;
-      const wallPapers = data.photos;
+
+      const wallPapers = [];
+      data.photos.map((value, index) => {
+        const finalData = {
+          id: value.id,
+          color: value.avg_color,
+          original: value.src.original,
+          large: value.src.large,
+          medium: value.src.medium,
+          small: value.src.small,
+          portrait: value.src.portrait,
+          landscape: value.src.landscape,
+        };
+        wallPapers.push(finalData);
+      });
+
       setWallpaper((prev) => [...prev, ...wallPapers]);
     } catch {
       console.error();
@@ -53,3 +68,13 @@ function WallPapersContextProvider({ children }) {
 }
 
 export default WallPapersContextProvider;
+// {
+//   "id": 439818,
+//   "color": "#576650",
+//  "original": "https://images.pexels.com/photos/439818/pexels-photo-439818.jpeg",
+// "large": "https://images.pexels.com/photos/439818/pexels-photo-439818.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+//  "medium": "https://images.pexels.com/photos/439818/pexels-photo-439818.jpeg?auto=compress&cs=tinysrgb&h=350",
+// "small": "https://images.pexels.com/photos/439818/pexels-photo-439818.jpeg?auto=compress&cs=tinysrgb&h=130",
+// "portrait": "https://images.pexels.com/photos/439818/pexels-photo-439818.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=1200&w=800",
+// "landscape": "https://images.pexels.com/photos/439818/pexels-photo-439818.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=627&w=1200",
+// }

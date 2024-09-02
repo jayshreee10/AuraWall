@@ -5,10 +5,10 @@ export class Validation {
         if (trimmedParams !== "") {
           return trimmedParams; 
         } else  {
-          return "hd wallpaper"; 
+          return "random"; 
         }
      } catch (error) {
-            return "hd wallpaper"; 
+            return "random"; 
      }
     }
   }
