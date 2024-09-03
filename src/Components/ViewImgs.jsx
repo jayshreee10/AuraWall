@@ -3,14 +3,15 @@ import { TbDownload } from "react-icons/tb";
 import { IoMdHeartEmpty } from "react-icons/io";
 import { GoHeartFill } from "react-icons/go";
 import { IoIosShareAlt } from "react-icons/io";
-function ViewImgs({ closeModal, imgSrc }) {
+function ViewImgs({ closeModal, imgSrc, downloadImg, shareImg }) {
   const items = [
     { icon: <CgClose size={20} />, onClick: closeModal },
-    { icon: <TbDownload size={20} />, onClick: closeModal },
+    { icon: <TbDownload size={20} />, onClick: downloadImg },
     { icon: <IoMdHeartEmpty size={20} />, onClick: closeModal },
     { icon: <GoHeartFill size={20} />, onClick: closeModal },
-    { icon: <IoIosShareAlt size={20} />, onClick: closeModal },
+    { icon: <IoIosShareAlt size={20} />, onClick: shareImg },
   ];
+
   return (
     <div className="h-full w-full">
       {/* Modal should be outside the map loop */}

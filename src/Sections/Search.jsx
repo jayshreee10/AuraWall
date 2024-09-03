@@ -27,6 +27,37 @@ function Search() {
     setOpenImg(false); // Function to close modal
   };
 
+  const downloadImg = async () => {
+    if (imgIndex !== null && wallpaper[imgIndex]) {
+      const imgSrc = wallpaper[imgIndex].original; // img link for viewimg modal
+
+      try {
+        const response = await fetch(imgSrc);
+        const blob = await response.blob();
+        const link = document.createElement("a");
+        link.href = URL.createObjectURL(blob);
+
+        // Use the filename from the original image
+        const filename = `wallpaper-${imgIndex}.jpg`;
+        link.download = filename;
+
+        // Append link to the DOM
+        document.body.appendChild(link);
+
+        // Trigger click event to start the download
+        link.click();
+
+        // Clean up
+        URL.revokeObjectURL(link.href);
+        document.body.removeChild(link);
+      } catch (error) {
+        console.error("Error downloading image:", error);
+      }
+    }
+  };
+
+  // const shareImg = () => {};
+
   const fetchWallpapers = async (value) => {
     let finalValue = value;
     if (searchValue !== "") {
@@ -72,14 +103,20 @@ function Search() {
 
       <div className="grid grid-cols-4 gap-2 items-center h-auto">
         {wallpaper.map((value, index) => (
-          <div key={index}>
-            <div className="h-[20rem] w-[22rem] rounded-md cursor-pointer">
+          <div key={index} className="relative group">
+            <div className="h-[20rem] w-[22rem] rounded-md overflow-hidden cursor-pointer">
               <img
                 src={value.medium}
                 alt="Wallpaper"
-                className="h-full w-full rounded-md"
-                onClick={() => handleImgClick(index)}
+                className="h-full w-full object-cover rounded-md transition-transform duration-300 group-hover:scale-105"
               />
+              {/* Overlay */}
+              <div
+                onClick={() => handleImgClick(index)}
+                className="absolute inset-0 rounded-md bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center"
+              >
+                <span className="text-white text-lg">click to view</span>
+              </div>
             </div>
           </div>
         ))}
@@ -90,6 +127,8 @@ function Search() {
         <ViewImgs
           closeModal={closeModal}
           imgSrc={wallpaper[imgIndex].original}
+          downloadImg={downloadImg}
+          // shareImg={shareImg}
         />
       )}
     </div>
