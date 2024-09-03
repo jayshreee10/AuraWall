@@ -115,7 +115,7 @@ function Search() {
                 onClick={() => handleImgClick(index)}
                 className="absolute inset-0 rounded-md bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center"
               >
-                <span className="text-white text-lg">click to view</span>
+                <span className="text-white text-lg">tap to view</span>
               </div>
             </div>
           </div>

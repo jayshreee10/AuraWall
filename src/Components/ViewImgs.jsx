@@ -5,11 +5,19 @@ import { GoHeartFill } from "react-icons/go";
 import { IoIosShareAlt } from "react-icons/io";
 function ViewImgs({ closeModal, imgSrc, downloadImg, shareImg }) {
   const items = [
-    { icon: <CgClose size={20} />, onClick: closeModal },
-    { icon: <TbDownload size={20} />, onClick: downloadImg },
-    { icon: <IoMdHeartEmpty size={20} />, onClick: closeModal },
-    { icon: <GoHeartFill size={20} />, onClick: closeModal },
-    { icon: <IoIosShareAlt size={20} />, onClick: shareImg },
+    { icon: <CgClose size={20} />, onClick: closeModal, title: "Close" },
+    { icon: <TbDownload size={20} />, onClick: downloadImg, title: "Download" },
+    {
+      icon: <IoMdHeartEmpty size={20} />,
+      onClick: closeModal,
+      title: "Wishlist",
+    },
+    {
+      icon: <GoHeartFill size={20} />,
+      onClick: closeModal,
+      title: "Wishlisted",
+    },
+    { icon: <IoIosShareAlt size={20} />, onClick: shareImg, title: "Share" },
   ];
 
   return (
@@ -22,6 +30,7 @@ function ViewImgs({ closeModal, imgSrc, downloadImg, shareImg }) {
             return (
               <button
                 key={index}
+                title={value.title}
                 className=" text-white bg-black bg-opacity-60 px-3 py-3 mb-2 rounded-full hover:bg-opacity-80 focus:outline-none"
                 onClick={value.onClick}
               >
