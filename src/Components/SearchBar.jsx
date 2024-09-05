@@ -23,7 +23,7 @@ function SearchBar({ onClick }) {
   return (
     <div className="w-[80vw]">
       <div className="flex flex-col p-2 py-6 m-h-screen">
-        <div className="bg-white items-center justify-between w-full flex rounded-full shadow-lg p-3 mb-5 sticky">
+        <div className="bg-white border-white border items-center justify-between w-full flex rounded-full shadow-md p-3 mb-5 sticky">
           <input
             className="font-bold rounded-full w-full py-4 pl-4 text-gray-700 bg-gray-100 leading-tight focus:outline-none focus:shadow-outline lg:text-sm text-xs"
             type="text"

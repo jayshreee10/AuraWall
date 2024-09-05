@@ -36,7 +36,6 @@ function Search() {
         const blob = await response.blob();
         const link = document.createElement("a");
         link.href = URL.createObjectURL(blob);
-
         // Use the filename from the original image
         const filename = `wallpaper-${imgIndex}.jpg`;
         link.download = filename;
@@ -97,16 +96,48 @@ function Search() {
   }, []);
 
   return (
-    <div className="w-full h-auto flex flex-col items-center justify-center ml-[110px] py-20">
+    <div className="w-full h-auto flex flex-col items-center justify-center ml-[110px] py-20 bg-slate-100">
+      <p className="text-5xl  pb-5 uppercase font-nerko font-semibold tracking-wider">
+        Uncover the Perfect Aura for Your Screen
+      </p>
       <SearchBar onClick={handleClick} />
       {loading && <div>Loading...</div>}
 
       <div className="grid grid-cols-4 gap-2 items-center h-auto">
         {wallpaper.map((value, index) => (
-          <div key={index} className="relative group">
-            <div className="h-[20rem] w-[22rem] rounded-md overflow-hidden cursor-pointer">
+          <div
+            key={index}
+            className={`relative group ${
+              index === 5
+                ? "col-span-2 row-span-2 object-center"
+                : index === 21
+                ? "col-span-2 row-span-2 object-center"
+                : index === 43
+                ? "col-span-2 row-span-2 object-center"
+                : ""
+            }`} // Make the first item larger
+          >
+            <div
+              className={`h-[20rem] ${
+                index === 5
+                  ? "w-[44rem] h-[40rem]"
+                  : index === 21
+                  ? "w-[44rem] h-[40rem]"
+                  : index === 43
+                  ? "w-[44rem] h-[40rem]"
+                  : "w-[22rem]"
+              } rounded-md overflow-hidden cursor-pointer shadow-lg object-center`}
+            >
               <img
-                src={value.medium}
+                src={
+                  index === 5
+                    ? value.original
+                    : index === 21
+                    ? value.original
+                    : index === 43
+                    ? value.original
+                    : value.medium
+                } // Use triple equals for comparison
                 alt="Wallpaper"
                 className="h-full w-full object-cover rounded-md transition-transform duration-300 group-hover:scale-105"
               />
@@ -115,7 +146,12 @@ function Search() {
                 onClick={() => handleImgClick(index)}
                 className="absolute inset-0 rounded-md bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center"
               >
-                <span className="text-white text-lg">tap to view</span>
+                <div className="text-white text-lg w-full flex flex-col items-center justify-end h-full">
+                  <p className="text-xs mb-[90px]">tap to view</p>
+                  <p className="text-sm backdrop-blur-sm w-full flex items-center justify-center py-2">
+                    By {value.photographer} ✨
+                  </p>
+                </div>
               </div>
             </div>
           </div>

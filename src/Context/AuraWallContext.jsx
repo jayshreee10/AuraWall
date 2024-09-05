@@ -39,6 +39,7 @@ function WallPapersContextProvider({ children }) {
           small: value.src.small,
           portrait: value.src.portrait,
           landscape: value.src.landscape,
+          photographer: value.photographer,
         };
         wallPapers.push(finalData);
       });
