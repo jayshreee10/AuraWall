@@ -107,37 +107,11 @@ function Search() {
         {wallpaper.map((value, index) => (
           <div
             key={index}
-            className={`relative group ${
-              index === 5
-                ? "col-span-2 row-span-2 object-center"
-                : index === 21
-                ? "col-span-2 row-span-2 object-center"
-                : index === 43
-                ? "col-span-2 row-span-2 object-center"
-                : ""
-            }`} // Make the first item larger
+            className="relative group " // Make the first item larger
           >
-            <div
-              className={`h-[20rem] ${
-                index === 5
-                  ? "w-[44rem] h-[40rem]"
-                  : index === 21
-                  ? "w-[44rem] h-[40rem]"
-                  : index === 43
-                  ? "w-[44rem] h-[40rem]"
-                  : "w-[22rem]"
-              } rounded-md overflow-hidden cursor-pointer shadow-lg object-center`}
-            >
+            <div className="h-[20rem] w-[22rem] rounded-md overflow-hidden cursor-pointer shadow-lg object-center">
               <img
-                src={
-                  index === 5
-                    ? value.original
-                    : index === 21
-                    ? value.original
-                    : index === 43
-                    ? value.original
-                    : value.medium
-                } // Use triple equals for comparison
+                src={value.medium} // Use triple equals for comparison
                 alt="Wallpaper"
                 className="h-full w-full object-cover rounded-md transition-transform duration-300 group-hover:scale-105"
               />
