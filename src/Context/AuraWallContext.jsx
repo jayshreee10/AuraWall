@@ -14,7 +14,7 @@ function WallPapersContextProvider({ children }) {
   async function getWallPapers(queryValue) {
     try {
       const validatedValue = Validation.inputValidation(queryValue);
-      console.log(validatedValue);
+      // console.log(validatedValue);
       const PEXEL_URL = `https://api.pexels.com/v1/search/?page=${page}&per_page=20&query=${validatedValue}`;
       const userKey =
         "U7QlRU8f5PQyLggmw5TvYsYBOsbyLd64EJZ5auiPf9oZEMYVnxVb6Olr";

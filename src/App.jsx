@@ -1,10 +1,12 @@
 import Menubar from "./Components/Menubar";
-import Search from "./Sections/Search";
+import Photos from "./Sections/Photos";
+import Videos from "./Sections/Videos";
 function App() {
   return (
     <div className="flex bg-slate-100">
       <Menubar />
-      <Search />
+      {/* <Photos /> */}
+      <Videos />
     </div>
   );
 }
