@@ -7,51 +7,56 @@ export const useVdoContext = () => {
 };
 
 function VdoContextProvider({ children }) {
-  const [url, setUrl] = useState("");
+  const [vdoWall, setVdoWall] = useState([]);
+  const [page, setPage] = useState(1);
 
   async function getVideos() {
     try {
-      const PEXEL_VDO_URL =
-        "https://api.pexels.com/videos/search?query=nature&per_page=1";
+      const PEXEL_VDO_URL = `https://api.pexels.com/videos/search/?page=${page}&query=food&per_page=12`;
       const userKey =
         "U7QlRU8f5PQyLggmw5TvYsYBOsbyLd64EJZ5auiPf9oZEMYVnxVb6Olr";
-      const authAxios = axios.create({
-        baseURL: PEXEL_VDO_URL,
+
+      const response = await axios.get(PEXEL_VDO_URL, {
         headers: {
           Authorization: userKey,
         },
       });
 
       console.log("getVideos function called");
-      const response = await authAxios.get();
-      const data = response.data;
+      const videoFiles = response.data.videos;
 
-      // Select an HD mp4 video file
-      const videoFiles = data.videos[0].video_files;
-      const hdVideo = videoFiles.find(
-        (file) => file.quality === "hd" && file.file_type === "video/mp4"
-      );
-      // It extracts the array of video_files (which contains video URLs of different qualities) from the first video result.
-      // Using .find(), it searches for an MP4 video in HD quality ("hd") and stores its link in the url state via setUrl(hdVideo.link).
+      const videos = [];
+      videoFiles.map((value) => {
+        const finalData = {
+          id: value.id,
+          image: value.image,
+          user: value.user.name,
+          hdVideoUrl: value.video_files.find(
+            (file) => file.quality === "hd" && file.file_type === "video/mp4"
+          )?.link, // Get the link directly
+          uhdVideoUrl: value.video_files.find(
+            (file) => file.quality === "uhd" && file.file_type === "video/mp4"
+          )?.link, // Get the link directly
+          sdVideoUrl: value.video_files.find(
+            (file) => file.quality === "sd" && file.file_type === "video/mp4"
+          )?.link, // Get the link directly
+        };
+        videos.push(finalData);
+      });
 
-      if (hdVideo) {
-        setUrl(hdVideo.link);
-        console.log("Video URL: ", hdVideo.link);
-      } else {
-        console.log("No suitable video file found.");
-      }
+      setVdoWall((prev) => [...prev, ...videos]);
     } catch (error) {
-      console.error("Error fetching video", error);
+      console.error("Error fetching videos:", error);
     }
   }
 
   useEffect(() => {
-    getVideos();
-  }, []);
+    getVideos(); // Call getVideos when the component mounts
+  }, [page]);
 
   const value = {
-    getVideos,
-    url,
+    vdoWall,
+    setPage,
   };
 
   return <VdoContext.Provider value={value}>{children}</VdoContext.Provider>;
