@@ -48,7 +48,7 @@ function Search() {
 
   const shareImg = () => {};
 
-  //to be fixed
+  //to be fixed infinite rendering
   useEffect(() => {
     getWallPapers();
   }, [page]);
