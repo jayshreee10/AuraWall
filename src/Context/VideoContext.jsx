@@ -17,7 +17,7 @@ function VdoContextProvider({ children }) {
   // Function to fetch videos from the API
   async function getVideos() {
     try {
-      const PEXEL_VDO_URL = `https://api.pexels.com/videos/search/?page=${page}&query=food&per_page=12`;
+      const PEXEL_VDO_URL = `https://api.pexels.com/videos/search/?page=${1}&query=food&per_page=12`;
       const userKey =
         "U7QlRU8f5PQyLggmw5TvYsYBOsbyLd64EJZ5auiPf9oZEMYVnxVb6Olr";
 

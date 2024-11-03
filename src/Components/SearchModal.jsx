@@ -1,7 +1,10 @@
 import React, { useState, useEffect, useRef } from "react";
 import { CiSearch } from "react-icons/ci"; // Importing the search icon from react-icons
+import { useWallContext } from "../Context/AuraWallContext";
+import { Validation } from "../Utility/validation";
 
-function SearchModal() {
+function SearchModal({ onClick }) {
+  const { searchValue, setSearchValue } = useWallContext();
   const [isModalOpen, setIsModalOpen] = useState(false); // State for modal visibility
   const [searchQuery, setSearchQuery] = useState(""); // State for search query
   const modalRef = useRef(null); // Reference to the modal
@@ -21,6 +24,21 @@ function SearchModal() {
     }
   };
 
+  const handleSearch = (value) => {
+    const validatedValue = Validation.inputValidation(searchValue);
+    onClick(validatedValue);
+  };
+
+  const handleKeyDown = (event) => {
+    if (event.key === "Enter") {
+      handleSearch();
+    }
+  };
+
+  const clearSearch = () => {
+    setSearchValue("");
+  };
+
   useEffect(() => {
     if (isModalOpen) {
       document.addEventListener("mousedown", handleClickOutside);
@@ -34,12 +52,14 @@ function SearchModal() {
 
   return (
     <div>
-      <button
-        onClick={() => setIsModalOpen(true)} // Open modal on button click
-        className="text-gray-600 hover:text-gray-800 focus:outline-none"
-      >
-        <CiSearch size={24} color="white" />
-      </button>
+      <div className="rounded-full hover:bg-gray-700 hover:bg-opacity-50">
+        <button
+          onClick={() => setIsModalOpen(true)} // Open modal on button click
+          className="text-gray-600 hover:text-gray-800 focus:outline-none p-2"
+        >
+          <CiSearch size={24} color="white" />
+        </button>
+      </div>
 
       {isModalOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
@@ -50,10 +70,11 @@ function SearchModal() {
             <h2 className="text-lg font-semibold mb-4">Search</h2>
             <input
               type="text"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)} // Update search query
+              value={searchValue}
+              onChange={(e) => setSearchValue(e.target.value)}
+              onKeyDown={handleKeyDown} // Update search query
               placeholder="Type your search query..."
-              className="w-full border border-gray-300 p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-300"
+              className="w-full border border-gray-300 p-2 text-black font-mono rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-300"
             />
             {/* <button
               onClick={() => setIsModalOpen(false)} // Close modal on button click

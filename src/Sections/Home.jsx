@@ -4,7 +4,10 @@ import { useNavigate } from "react-router-dom";
 function Home() {
   const navigate = useNavigate();
   return (
-    <div className="flex items-center h-full w-full justify-center text-center  bg-black">
+    <div className="flex flex-col items-center h-full w-full justify-center text-center  bg-black">
+      <p className="text-5xl text-white  pb-5 uppercase font-nerko font-semibold tracking-wider">
+        Uncover the Perfect Aura for Your Screen
+      </p>
       <div className="flex flex-wrap justify-center gap-6">
         <button
           className="relative"

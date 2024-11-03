@@ -4,16 +4,7 @@ import SearchBar from "../Components/SearchBar";
 import ViewImgs from "../Components/ViewImgs";
 
 function Search() {
-  const {
-    getWallPapers,
-    wallpaper,
-    setPage,
-    page,
-    loading,
-    setLoading,
-    setWallpaper,
-    searchValue,
-  } = useWallContext();
+  const { getWallPapers, wallpaper, setPage, page, loading } = useWallContext();
 
   const [imgIndex, setImgIndex] = useState(null); // Track clicked image index
   const [openImg, setOpenImg] = useState(false); // Manage modal visibility
@@ -55,27 +46,12 @@ function Search() {
     }
   };
 
-  // const shareImg = () => {};
+  const shareImg = () => {};
 
-  const fetchWallpapers = async (value) => {
-    let finalValue = value;
-    if (searchValue !== "") {
-      finalValue = searchValue;
-    }
-    setLoading(true);
-    await getWallPapers(finalValue);
-    setLoading(false);
-  };
-
+  //to be fixed
   useEffect(() => {
-    fetchWallpapers();
+    getWallPapers();
   }, [page]);
-
-  const handleClick = (value) => {
-    setWallpaper([]); // Clear wallpapers
-    fetchWallpapers(value); // Fetch new wallpapers based on search value
-    setPage(1); // Reset page number
-  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -97,10 +73,7 @@ function Search() {
 
   return (
     <div className="w-full h-auto flex flex-col items-center justify-center ml-[110px] py-20 bg-slate-100">
-      <p className="text-5xl  pb-5 uppercase font-nerko font-semibold tracking-wider">
-        Uncover the Perfect Aura for Your Screen
-      </p>
-      <SearchBar onClick={handleClick} />
+      {/* <SearchBar onClick={handleClick} /> */}
       {loading && <div>Loading...</div>}
 
       <div className="grid grid-cols-4 gap-2 items-center h-auto">

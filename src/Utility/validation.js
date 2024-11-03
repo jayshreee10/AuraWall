@@ -5,10 +5,10 @@ export class Validation {
         if (trimmedParams !== "") {
           return trimmedParams; 
         } else  {
-          return "random"; 
+          return "brown"; 
         }
      } catch (error) {
-            return "random"; 
+            return "brown"; 
      }
     }
   }
