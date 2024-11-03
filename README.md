@@ -1,2 +1,3 @@
 ## AuraWall 
-### WallPaper web application: <span class="text-red-500">Under Development 🛠️</span>
+### WallPaper web application
+### ![Under Development](https://img.shields.io/badge/Under%20Development-red) 🛠️
