@@ -10,4 +10,27 @@
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>
+  <script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-analytics.js";
+    // TODO: Add SDKs for Firebase products that you want to use
+    // https://firebase.google.com/docs/web/setup#available-libraries
+  
+    // Your web app's Firebase configuration
+    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+    const firebaseConfig = {
+      apiKey: "AIzaSyD608RbqO2217Z9pRj5euNHrWG-MvV8ADA",
+      authDomain: "aurawall-d73a3.firebaseapp.com",
+      projectId: "aurawall-d73a3",
+      storageBucket: "aurawall-d73a3.firebasestorage.app",
+      messagingSenderId: "487395353996",
+      appId: "1:487395353996:web:51bd8ad49ef7f40e6be2a9",
+      measurementId: "G-DLE06TRNHJ"
+    };
+  
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+  </script>
 </html>
