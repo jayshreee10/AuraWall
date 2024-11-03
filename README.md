@@ -1,2 +1,2 @@
 ## AuraWall 
-###  WallPaper web application : Under Development 🛠️
+### WallPaper web application: <span class="text-red-500">Under Development 🛠️</span>
